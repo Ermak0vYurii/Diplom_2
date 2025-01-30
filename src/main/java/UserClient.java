@@ -1,7 +1,6 @@
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
 
-import static com.sun.org.apache.xerces.internal.util.PropertyState.is;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.notNullValue;
 
@@ -27,8 +26,8 @@ public class UserClient extends BaseHttpClient {
     }
 
     @Step("Удаление пользователя. Send DELETE request to api/auth/user")
-    public Response deleteUser(String token) {
-        return doDeleteRequest(PATH_USER, token);
+    public void deleteUser(String token) {
+        doDeleteRequest(PATH_USER, token);
     }
 
     @Step("Compare status code")
