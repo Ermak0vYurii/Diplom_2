@@ -35,4 +35,20 @@ public abstract class BaseHttpClient  {
                 .delete(path)
                 .thenReturn();
     }
+
+    protected Response doPatchRequest(String path, Object body, String token) {
+        return given()
+                .spec(baseRequestSpec)
+                .header("Authorization", token)
+                .body(body)
+                .patch(path)
+                .thenReturn();
+    }
+    protected Response doPatchRequest(String path, Object body) {
+        return given()
+                .spec(baseRequestSpec)
+                .body(body)
+                .patch(path)
+                .thenReturn();
+    }
 }
