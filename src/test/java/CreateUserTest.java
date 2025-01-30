@@ -34,6 +34,36 @@ public class CreateUserTest {
         client.createUser(user);
         Response response = client.createUser(user);
         client.compareStatusCode(response, SC_FORBIDDEN);
-        client.compareResponseBodyMessage(response);
+        client.compareResponseBodyMessage(response, "User already exists");
+    }
+
+    @Test
+    @DisplayName("Создание пользователя без email")
+    public void createUserWithoutEmailTest() {
+        client.createUser(user);
+        User userWithoutEmail = new User("", "password", "Ivan");
+        Response response = client.createUser(userWithoutEmail);
+        client.compareStatusCode(response, SC_FORBIDDEN);
+        client.compareResponseBodyMessage(response, "Email, password and name are required fields");
+    }
+
+    @Test
+    @DisplayName("Создание пользователя без password")
+    public void createUserWithoutPasswordTest() {
+        client.createUser(user);
+        User userWithoutPassword = new User("user-test@ya.ru", "", "Ivan");
+        Response response = client.createUser(userWithoutPassword);
+        client.compareStatusCode(response, SC_FORBIDDEN);
+        client.compareResponseBodyMessage(response, "Email, password and name are required fields");
+    }
+
+    @Test
+    @DisplayName("Создание пользователя без name")
+    public void createUserWithoutNameTest() {
+        client.createUser(user);
+        User userWithoutName = new User("user-test@ya.ru", "password", "");
+        Response response = client.createUser(userWithoutName);
+        client.compareStatusCode(response, SC_FORBIDDEN);
+        client.compareResponseBodyMessage(response, "Email, password and name are required fields");
     }
 }
