@@ -1,6 +1,8 @@
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
 
+import static com.sun.org.apache.xerces.internal.util.PropertyState.is;
+import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.notNullValue;
 
 public class UserClient extends BaseHttpClient {
@@ -37,6 +39,11 @@ public class UserClient extends BaseHttpClient {
     @Step("Compare response body")
     public void compareResponseBody(Response response) {
         response.then().assertThat().body("user", notNullValue());
+    }
+
+    @Step("Compare body error message")
+    public void compareResponseBodyMessage(Response response) {
+        response.then().assertThat().body("message", equalTo("User already exists"));
     }
 
 }
