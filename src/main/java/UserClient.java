@@ -41,8 +41,8 @@ public class UserClient extends BaseHttpClient {
     }
 
     @Step("Compare body error message")
-    public void compareResponseBodyMessage(Response response) {
-        response.then().assertThat().body("message", equalTo("User already exists"));
+    public void compareResponseBodyMessage(Response response, String message) {
+        response.then().assertThat().body("message", equalTo(message));
     }
 
 }
