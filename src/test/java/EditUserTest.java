@@ -29,7 +29,7 @@ public class EditUserTest {
         User editEmailUser = new User("updateemail@ya.ru", null, null);
         Response responseForTest = client.editUser(editEmailUser, token);
         client.compareStatusCode(responseForTest, SC_OK);
-        //здесь нужно написать проверку responseBody
+        client.compareResponseBodyUserData(responseForTest, "updateemail@ya.ru");
         client.deleteUser(token);
     }
 
