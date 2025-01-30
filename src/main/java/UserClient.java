@@ -45,4 +45,14 @@ public class UserClient extends BaseHttpClient {
         response.then().assertThat().body("message", equalTo(message));
     }
 
+    @Step("Изменение авторизованного пользователя. Send PATCH request to api/auth/user")
+    public Response editUser(Object body, String token) {
+       return doPatchRequest(PATH_USER, body, token);
+    }
+
+    @Step("Изменение неавторизованного пользователя. Send PATCH request to api/auth/user")
+    public Response editUser(Object body) {
+        return doPatchRequest(PATH_USER, body);
+    }
+
 }
