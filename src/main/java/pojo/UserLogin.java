@@ -1,10 +1,11 @@
+package pojo;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class User {
+public class UserLogin {
     private String email;
     private String password;
-    private String name;
 }

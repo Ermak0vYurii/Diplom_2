@@ -1,3 +1,5 @@
+package pojo;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 

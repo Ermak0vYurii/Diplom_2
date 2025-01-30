@@ -1,6 +1,8 @@
 import io.restassured.response.Response;
 import org.junit.After;
 import org.junit.Test;
+import pojo.User;
+import pojo.UserLogin;
 
 import static org.apache.http.HttpStatus.*;
 
