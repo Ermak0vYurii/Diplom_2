@@ -27,4 +27,13 @@ public class CreateUserTest {
         client.compareStatusCode(response, SC_OK);
         client.compareResponseBody(response);
     }
+
+    @Test
+    @DisplayName("Создание пользователя, который уже зарегистрирован")
+    public void createDoubleUserTest() {
+        client.createUser(user);
+        Response response = client.createUser(user);
+        client.compareStatusCode(response, SC_FORBIDDEN);
+        client.compareResponseBodyMessage(response);
+    }
 }
