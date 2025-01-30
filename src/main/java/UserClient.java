@@ -55,4 +55,9 @@ public class UserClient extends BaseHttpClient {
         return doPatchRequest(PATH_USER, body);
     }
 
+    @Step("Compare response body user new email")
+    public void compareResponseBodyUserData(Response response, String newEmail) {
+        response.then().assertThat().body("user.email", equalTo(newEmail));
+    }
+
 }
