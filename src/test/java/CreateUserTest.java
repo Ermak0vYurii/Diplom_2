@@ -1,3 +1,4 @@
+import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.Response;
 import org.junit.After;
 import org.junit.Test;
@@ -20,6 +21,7 @@ public class CreateUserTest {
     }
 
     @Test
+    @DisplayName("Создание уникального пользователя")
     public void createUniqueUserTest() {
         Response response = client.createUser(user);
         client.compareStatusCode(response, SC_OK);
