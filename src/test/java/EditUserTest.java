@@ -37,6 +37,22 @@ public class EditUserTest {
     }
 
     @Test
+    @DisplayName("Изменение email на email, который уже используется")
+    public void failEditEmailTest() {
+        User newUser = new User("newUser@ya.ru", "pass", "Name");
+        UserLogin newUserLogin = new UserLogin(newUser.getEmail(), newUser.getPassword());
+        Response forToken = client.createUser(newUser);
+        client.loginUser(login);
+        User editEmail = new User(newUser.getEmail(), null, null);
+        Response response = client.editUser(editEmail, token);
+        client.compareStatusCode(response, SC_FORBIDDEN);
+        client.compareResponseBodyMessage(response, "User with such email already exists");
+        String tokenNewUser = client.getToken(forToken);
+        client.loginUser(newUserLogin);
+        client.deleteUser(tokenNewUser);
+    }
+
+    @Test
     @DisplayName("Изменение name авторизованного пользователя")
     public void editNameAuthUserTest() {
         client.loginUser(login);
@@ -54,5 +70,14 @@ public class EditUserTest {
         Response response = client.editUser(editPasswordUser, token);
         client.compareStatusCode(response, SC_OK);
         client.compareResponseBody(response);
+    }
+
+    @Test
+    @DisplayName("Изменение данных неавторизованного пользователя")
+    public void editUserWithoutAuthTest() {
+        User editUser = new User("updateemail@ya.ru", "newpassword", "Alex");
+        Response response = client.editUser(editUser);
+        client.compareStatusCode(response, SC_UNAUTHORIZED);
+        client.compareResponseBodyMessage(response, "You should be authorised");
     }
 }
