@@ -44,11 +44,19 @@ public abstract class BaseHttpClient  {
                 .patch(path)
                 .thenReturn();
     }
+
     protected Response doPatchRequest(String path, Object body) {
         return given()
                 .spec(baseRequestSpec)
                 .body(body)
                 .patch(path)
+                .thenReturn();
+    }
+
+    protected Response doGetRequest(String path) {
+        return given()
+                .spec(baseRequestSpec)
+                .get(path)
                 .thenReturn();
     }
 }
