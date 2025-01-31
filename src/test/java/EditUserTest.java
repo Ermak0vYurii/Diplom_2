@@ -29,7 +29,7 @@ public class EditUserTest {
         User editEmailUser = new User("updateemail@ya.ru", null, null);
         Response responseForTest = client.editUser(editEmailUser, token);
         client.compareStatusCode(responseForTest, SC_OK);
-        client.compareResponseBodyUserData(responseForTest, "updateemail@ya.ru");
+        client.compareResponseBodyUserEmail(responseForTest, "updateemail@ya.ru");
         client.deleteUser(token);
     }
 
@@ -42,7 +42,7 @@ public class EditUserTest {
         User editNameUser = new User(null, null, "Alex");
         Response responseForTest = client.editUser(editNameUser, token);
         client.compareStatusCode(responseForTest, SC_OK);
-        //здесь нужно написать проверку responseBody
+        client.compareResponseBodyUserName(responseForTest, "Alex");
         client.deleteUser(token);
     }
 
