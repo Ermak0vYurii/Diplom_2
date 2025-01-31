@@ -11,7 +11,7 @@ public abstract class BaseHttpClient  {
 
     public static final String URL = "https://stellarburgers.nomoreparties.site/";
 
-    private RequestSpecification baseRequestSpec = new RequestSpecBuilder()
+    private final RequestSpecification baseRequestSpec = new RequestSpecBuilder()
             .setBaseUri(URL)
             .addHeader("Content-type", "application/json")
             .setRelaxedHTTPSValidation()
