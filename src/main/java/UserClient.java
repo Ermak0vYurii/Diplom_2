@@ -56,8 +56,13 @@ public class UserClient extends BaseHttpClient {
     }
 
     @Step("Compare response body user new email")
-    public void compareResponseBodyUserData(Response response, String newEmail) {
+    public void compareResponseBodyUserEmail(Response response, String newEmail) {
         response.then().assertThat().body("user.email", equalTo(newEmail));
+    }
+
+    @Step("Compare response body user new name")
+    public void compareResponseBodyUserName(Response response, String newName) {
+        response.then().assertThat().body("user.name", equalTo(newName));
     }
 
 }
