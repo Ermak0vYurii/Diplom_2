@@ -12,11 +12,12 @@ public class CreateUserTest {
     User user = new User("user-test@ya.ru", "password", "Ivan");
     UserLogin login = new UserLogin(user.getEmail(), user.getPassword());
     UserClient client = new UserClient();
+    String token;
 
     @After
     public void cleanUp() {
         Response response = client.loginUser(login);
-        String token = client.getToken(response);
+        token = client.getToken(response);
         client.deleteUser(token);
     }
 
