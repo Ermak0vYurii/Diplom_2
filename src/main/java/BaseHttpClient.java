@@ -68,4 +68,12 @@ public abstract class BaseHttpClient  {
                 .get(path)
                 .thenReturn();
     }
+
+    protected Response doGetRequest(String path, String token) {
+        return given()
+                .spec(baseRequestSpec)
+                .header("Authorization", token)
+                .get(path)
+                .thenReturn();
+    }
 }
