@@ -28,6 +28,15 @@ public abstract class BaseHttpClient  {
                 .thenReturn();
     }
 
+    protected Response doPostRequest(String path, Object body, String token) {
+        return given()
+                .spec(baseRequestSpec)
+                .header("Authorization", token)
+                .body(body)
+                .post(path)
+                .thenReturn();
+    }
+
     protected void doDeleteRequest(String path, String token) {
         given()
                 .spec(baseRequestSpec)
