@@ -52,4 +52,20 @@ public class OrderClient extends BaseHttpClient {
     public void compareErrorMessage(Response response, String message) {
         response.then().assertThat().body("message", equalTo(message));
     }
+
+    @Step("Send GET request to api/orders")
+    public Response getOrdersAuthUser(String token) {
+        return doGetRequest(PATH_ORDER, token);
+    }
+
+    @Step("Send GET request to api/orders")
+    public Response getOrdersWithoutAuth() {
+        return doGetRequest(PATH_ORDER);
+    }
+
+    @Step("Compare response body")
+    public void compareResponseBodyGetOrders(Response response) {
+        response.then().assertThat().body("success", equalTo(true))
+                .and().assertThat().body("orders", notNullValue());
+    }
 }
