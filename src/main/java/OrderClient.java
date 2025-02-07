@@ -8,12 +8,9 @@ import static org.hamcrest.Matchers.notNullValue;
 
 public class OrderClient extends BaseHttpClient {
 
-    private final static String PATH_ORDER = "/api/orders";
-    private final static String PATH_INGREDIENTS = "/api/ingredients";
-
     @Step("Send GET request to api/ingredients")
     public Response getIngredients() {
-        return doGetRequest(PATH_INGREDIENTS);
+        return doGetRequest(Endpoints.PATH_INGREDIENTS);
     }
 
     @Step("Get ingredients _id")
@@ -23,12 +20,12 @@ public class OrderClient extends BaseHttpClient {
 
     @Step("Send POST request to api/orders")
     public Response createOrder(Object body) {
-        return doPostRequest(PATH_ORDER, body);
+        return doPostRequest(Endpoints.PATH_ORDER, body);
     }
 
     @Step("Send POST request to api/orders")
     public Response createOrderAuthUser(Object body, String token) {
-        return doPostRequest(PATH_ORDER, body, token);
+        return doPostRequest(Endpoints.PATH_ORDER, body, token);
     }
 
     @Step("Compare status code")
@@ -55,12 +52,12 @@ public class OrderClient extends BaseHttpClient {
 
     @Step("Send GET request to api/orders")
     public Response getOrdersAuthUser(String token) {
-        return doGetRequest(PATH_ORDER, token);
+        return doGetRequest(Endpoints.PATH_ORDER, token);
     }
 
     @Step("Send GET request to api/orders")
     public Response getOrdersWithoutAuth() {
-        return doGetRequest(PATH_ORDER);
+        return doGetRequest(Endpoints.PATH_ORDER);
     }
 
     @Step("Compare response body")

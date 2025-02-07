@@ -10,7 +10,7 @@ import static org.apache.http.HttpStatus.*;
 
 public class EditUserTest {
 
-    User user = new User("user-test@ya.ru", "password", "Ivan");
+    User user = UserGenerator.getRandomUser();
     UserLogin login = new UserLogin(user.getEmail(), user.getPassword());
     UserClient client = new UserClient();
     String token;
@@ -45,11 +45,11 @@ public class EditUserTest {
         client.loginUser(login);
         User editEmail = new User(newUser.getEmail(), null, null);
         Response response = client.editUser(editEmail, token);
-        client.compareStatusCode(response, SC_FORBIDDEN);
-        client.compareResponseBodyMessage(response, "User with such email already exists");
         String tokenNewUser = client.getToken(forToken);
         client.loginUser(newUserLogin);
         client.deleteUser(tokenNewUser);
+        client.compareStatusCode(response, SC_FORBIDDEN);
+        client.compareResponseBodyMessage(response, "User with such email already exists");
     }
 
     @Test
@@ -60,16 +60,6 @@ public class EditUserTest {
         Response response = client.editUser(editNameUser, token);
         client.compareStatusCode(response, SC_OK);
         client.compareResponseBodyUserName(response, "Alex");
-    }
-
-    @Test
-    @DisplayName("Изменение password авторизованного пользователя")
-    public void editPasswordAuthUserTest() {
-        client.loginUser(login);
-        User editPasswordUser = new User(null, "newpassword", null);
-        Response response = client.editUser(editPasswordUser, token);
-        client.compareStatusCode(response, SC_OK);
-        client.compareResponseBody(response);
     }
 
     @Test

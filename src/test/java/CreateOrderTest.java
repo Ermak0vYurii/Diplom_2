@@ -14,7 +14,7 @@ import static org.apache.http.HttpStatus.*;
 
 public class CreateOrderTest {
 
-    User user = new User("user-test@ya.ru", "password", "Ivan");
+    User user = UserGenerator.getRandomUser();
     UserLogin login = new UserLogin(user.getEmail(), user.getPassword());
     UserClient userClient = new UserClient();
     OrderClient orderClient = new OrderClient();

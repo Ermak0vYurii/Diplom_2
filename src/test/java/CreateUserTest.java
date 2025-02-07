@@ -9,7 +9,7 @@ import static org.apache.http.HttpStatus.*;
 
 public class CreateUserTest {
 
-    User user = new User("user-test@ya.ru", "password", "Ivan");
+    User user = UserGenerator.getRandomUser();
     UserLogin login = new UserLogin(user.getEmail(), user.getPassword());
     UserClient client = new UserClient();
     String token;
