@@ -1,3 +1,4 @@
+import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.Response;
 import org.junit.After;
@@ -28,6 +29,7 @@ public class EditUserTest {
 
     @Test
     @DisplayName("Изменение email авторизованного пользователя")
+    @Description("Проверка ручки изменения данных пользователя PATCH api/auth/user")
     public void editEmailAuthUserTest() {
         client.loginUser(login);
         User editEmailUser = new User("updateemail@ya.ru", null, null);
@@ -38,6 +40,7 @@ public class EditUserTest {
 
     @Test
     @DisplayName("Изменение email на email, который уже используется")
+    @Description("Проверка ручки изменения данных пользователя PATCH api/auth/user")
     public void failEditEmailTest() {
         User newUser = new User("newUser@ya.ru", "pass", "Name");
         UserLogin newUserLogin = new UserLogin(newUser.getEmail(), newUser.getPassword());
@@ -54,6 +57,7 @@ public class EditUserTest {
 
     @Test
     @DisplayName("Изменение name авторизованного пользователя")
+    @Description("Проверка ручки изменения данных пользователя PATCH api/auth/user")
     public void editNameAuthUserTest() {
         client.loginUser(login);
         User editNameUser = new User(null, null, "Alex");
@@ -64,6 +68,7 @@ public class EditUserTest {
 
     @Test
     @DisplayName("Изменение данных неавторизованного пользователя")
+    @Description("Проверка ручки изменения данных пользователя PATCH api/auth/user")
     public void editUserWithoutAuthTest() {
         User editUser = new User("updateemail@ya.ru", "newpassword", "Alex");
         Response response = client.editUser(editUser);

@@ -1,3 +1,4 @@
+import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.Response;
 import org.junit.After;
@@ -33,6 +34,8 @@ public class CreateOrderTest {
 
     @Test
     @DisplayName("Создание заказа с ингредиентами и авторизацией")
+    @Description("Проверка ручки создания заказа POST api/orders " +
+            "c токеном в заголовке и ингредиентами в теле запроса ")
     public void createOrderWithAuthTest() {
         userClient.loginUser(login);
         Response responseIngredients = orderClient.getIngredients();
@@ -48,6 +51,7 @@ public class CreateOrderTest {
 
     @Test
     @DisplayName("Создание заказа с ингредиентами без авторизации")
+    @Description("Проверка ручки создания заказа POST api/orders c ингредиентами в теле запроса, без передачи токена")
     public void createOrderWithoutAuthTest() {
         Response responseIngredients = orderClient.getIngredients();
         List<String> idIngredients = orderClient.getIngredientsId(responseIngredients);
@@ -62,6 +66,7 @@ public class CreateOrderTest {
 
     @Test
     @DisplayName("Создание заказа без ингредиентов")
+    @Description("Проверка ручки создание заказа POST api/orders с пустым телом запроса")
     public void createOrderWithoutIngredientsTest() {
         List<String> ingredientsForOrder = new ArrayList<>();
         Order order = new Order(ingredientsForOrder);
@@ -72,6 +77,7 @@ public class CreateOrderTest {
 
     @Test
     @DisplayName("Создание заказа с неверным хешем ингредиентов")
+    @Description("Проверка ручки создание заказа POST api/orders с передачей в теле запроса неверный хеш ингредиентов")
     public void createOrderWithInvalidIngredientsTest() {
         List<String> invalidIngredients = new ArrayList<>();
             invalidIngredients.add("1c0c5a71d1f82001bdaaa6d");
@@ -80,5 +86,4 @@ public class CreateOrderTest {
         Response response = orderClient.createOrder(order);
         orderClient.compareStatusCode(response, SC_INTERNAL_SERVER_ERROR);
     }
-
 }

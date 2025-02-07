@@ -1,3 +1,4 @@
+import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.Response;
 import org.junit.After;
@@ -28,6 +29,7 @@ public class LoginUserTest {
 
     @Test
     @DisplayName("Логин под существующим пользователем")
+    @Description("Проверка ручки авторизация пользователя POST api/auth/login")
     public void loginUserTest() {
         Response response = client.loginUser(login);
         client.compareStatusCode(response, SC_OK);
@@ -36,6 +38,7 @@ public class LoginUserTest {
 
     @Test
     @DisplayName("Авторизация с неверным логином")
+    @Description("Проверка ручки авторизация пользователя POST api/auth/login")
     public void loginWithInvalidLogin() {
         User userWithInvalidLogin = new User("test@mail.ru", user.getPassword(), user.getName());
         UserLogin loginWithInvalidLogin = new UserLogin(userWithInvalidLogin.getEmail(), user.getPassword());
@@ -46,6 +49,7 @@ public class LoginUserTest {
 
     @Test
     @DisplayName("Авторизация с неверным паролем")
+    @Description("Проверка ручки авторизация пользователя POST api/auth/login")
     public void loginWithInvalidPassword() {
         User userWithInvalidPassword = new User(user.getEmail(), "incorrect", user.getName());
         UserLogin loginWithInvalidPassword = new UserLogin(user.getEmail(), userWithInvalidPassword.getPassword());

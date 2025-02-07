@@ -1,3 +1,4 @@
+import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.Response;
 import org.junit.After;
@@ -41,6 +42,7 @@ public class GetOrdersTest {
 
     @Test
     @DisplayName("Получение списка заказов авторизованного пользователя")
+    @Description("Проверка ручки получения списка заказов пользователя GET api/orders")
     public void getOrdersAuthUserTest() {
         userClient.loginUser(login);
         orderClient.createOrderAuthUser(order, token);
@@ -51,6 +53,7 @@ public class GetOrdersTest {
 
     @Test
     @DisplayName("Получение списка заказов неавторизованного пользователя")
+    @Description("Проверка ручки получения списка заказов пользователя GET api/orders")
     public void getOrdersWithoutAuthTest() {
         orderClient.createOrder(order);
         Response response = orderClient.getOrdersWithoutAuth();

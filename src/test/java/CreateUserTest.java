@@ -1,3 +1,4 @@
+import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.Response;
 import org.junit.After;
@@ -23,6 +24,7 @@ public class CreateUserTest {
 
     @Test
     @DisplayName("Создание уникального пользователя")
+    @Description("Проверка ручки создание пользователя POST api/auth/register")
     public void createUniqueUserTest() {
         Response response = client.createUser(user);
         client.compareStatusCode(response, SC_OK);
@@ -31,6 +33,7 @@ public class CreateUserTest {
 
     @Test
     @DisplayName("Создание пользователя, который уже зарегистрирован")
+    @Description("Проверка ручки создание пользователя POST api/auth/register")
     public void createDoubleUserTest() {
         client.createUser(user);
         Response response = client.createUser(user);
@@ -40,6 +43,7 @@ public class CreateUserTest {
 
     @Test
     @DisplayName("Создание пользователя без email")
+    @Description("Проверка ручки создание пользователя POST api/auth/register")
     public void createUserWithoutEmailTest() {
         client.createUser(user);
         User userWithoutEmail = new User("", "password", "Ivan");
@@ -50,6 +54,7 @@ public class CreateUserTest {
 
     @Test
     @DisplayName("Создание пользователя без password")
+    @Description("Проверка ручки создание пользователя POST api/auth/register")
     public void createUserWithoutPasswordTest() {
         client.createUser(user);
         User userWithoutPassword = new User("user-test@ya.ru", "", "Ivan");
@@ -60,6 +65,7 @@ public class CreateUserTest {
 
     @Test
     @DisplayName("Создание пользователя без name")
+    @Description("Проверка ручки создание пользователя POST api/auth/register")
     public void createUserWithoutNameTest() {
         client.createUser(user);
         User userWithoutName = new User("user-test@ya.ru", "password", "");
